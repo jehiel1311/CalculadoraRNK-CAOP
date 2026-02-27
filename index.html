@@ -4,10 +4,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Ranking CAOP (Abril-Mayo-Junio)</title>
-
   <style>
     :root{
-      /* Paleta inspirada en tu pieza */
+      color-scheme: dark;
+
       --bg0:#070a12;
       --bg1:#0b1020;
       --bg2:#0a1226;
@@ -37,8 +37,6 @@
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
-
-      /* Fondo “cósmico” similar al flyer */
       background:
         radial-gradient(1200px 800px at 50% -10%, rgba(255,240,182,0.10), transparent 55%),
         radial-gradient(900px 650px at 15% 20%, rgba(214,179,106,0.12), transparent 55%),
@@ -48,7 +46,6 @@
       overflow-x:hidden;
     }
 
-    /* Partículas tipo estrellas */
     body::before{
       content:"";
       position:fixed;
@@ -102,33 +99,18 @@
       font-size: clamp(22px, 2.8vw, 32px);
       letter-spacing: 0.2px;
       line-height: 1.15;
+
+      background: linear-gradient(180deg, var(--gold1), var(--gold3) 55%, var(--gold4));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 26px rgba(214,179,106,0.18);
     }
 
     .subtitle{
       margin: 8px 0 0;
       color: var(--muted);
       font-size: 14px;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(214,179,106,0.25);
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      font-size: 13px;
-      color: rgba(255,255,255,0.75);
-      white-space: nowrap;
-    }
-
-    .badgeDot{
-      width:10px; height:10px; border-radius:50%;
-      background: linear-gradient(180deg, var(--gold1), var(--gold3));
-      box-shadow: 0 0 0 4px rgba(214,179,106,0.18);
     }
 
     .card{
@@ -140,7 +122,6 @@
       position:relative;
     }
 
-    /* brillo dorado sutil arriba */
     .card::before{
       content:"";
       position:absolute;
@@ -203,6 +184,12 @@
       -webkit-appearance:none;
       -moz-appearance:none;
       cursor:pointer;
+      color-scheme: dark;
+    }
+
+    select option{
+      background: #0b1020;
+      color: rgba(255,255,255,0.92);
     }
 
     .chev{
@@ -285,7 +272,6 @@
       letter-spacing: -0.6px;
       line-height: 1.05;
 
-      /* Texto dorado con brillo */
       background: linear-gradient(180deg, var(--gold1), var(--gold3) 55%, var(--gold4));
       -webkit-background-clip: text;
       background-clip: text;
@@ -371,10 +357,8 @@
           <h1 class="title">Ranking CAOP (Abril-Mayo-Junio)</h1>
           <div class="subtitle">Calculadora de puntos (TOP 40). Ingresá los datos del torneo.</div>
         </div>
-        <div class="badge"><span class="badgeDot"></span> Estética CAOP</div>
       </div>
 
-      <!-- Calculadora -->
       <section class="card">
         <div class="inner">
           <div class="grid">
@@ -430,7 +414,6 @@
         </div>
       </section>
 
-      <!-- Fórmula -->
       <aside class="side">
         <div class="inner">
           <h3 class="sideTitle">Fórmula aplicada</h3>
@@ -456,7 +439,6 @@
   </div>
 
   <script>
-    // Montos internos (Tipo de evento)
     const EVENTOS = [
       { key: "FINAL_HAND", label: "FINAL HAND", monto: 225000 },
       { key: "CHAMPIONS",  label: "CHAMPIONS",  monto: 105000 },
@@ -478,7 +460,6 @@
     const resMeta = document.getElementById("resMeta");
     const pillRow = document.getElementById("pillRow");
 
-    // Init selects
     (function init(){
       posSel.innerHTML = "";
       for (let i = 1; i <= 40; i++) {
@@ -522,7 +503,6 @@
       msg.textContent = "";
     }
 
-    // Solo enteros
     qEntEl.addEventListener("input", () => {
       qEntEl.value = String(qEntEl.value).replace(/[^\d]/g, "");
     });
@@ -578,7 +558,6 @@
 
     btn.addEventListener("click", calcular);
 
-    // Enter para calcular (excepto en selects)
     document.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         if (document.activeElement && document.activeElement.tagName === "SELECT") return;
